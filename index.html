@@ -112,7 +112,9 @@
             _updateNews(dataNewsId, selector) {
                 let id = this.news.findIndex(item => item.id === dataNewsId)
                 let $news = document.querySelectorAll('.news')[id]
-                $news.querySelector('.__readed').textContent = 'прочитано';
+                if (selector == '.__readed') {
+                    $news.querySelector(selector).textContent = 'прочитано';
+                }
             },
 
             _updateNewsCounter() {
