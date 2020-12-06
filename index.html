@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News widget</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="news-widget" class="widget closed">
+        <div id="news-counter" class="__counter">
+        </div>
+        <div id="widget-content" class="content hidden">
+            <div id="close-widget" class="close-widget">Закрыть</div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const newsJSON = [
+        {
+            "id": 12121,
+            "body": {
+                "title": "Украина потребует ужесточить санкции против России из-за Донбасса",
+                "link": "https://yandex.ru/news/story/Ukraina_potrebuet_uzhestochit_sankcii_protiv_Rossii_iz-za_Donbassa--f0083da7ad817869d5dc196319e61fdf?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.f0083da7&msid=1607272371.40163.85361.575835&persistent_id=121418880&stid=jHG9RPzr-6Tz73M7cMo7&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 22134,
+            "body": {
+                "title": "МИД счел одобрением реваншизма упоминание Курил в правилах по грин-картам",
+                "link": "https://yandex.ru/news/story/MID_schel_odobreniem_revanshizma_upominanie_Kuril_v_pravilakh_po_grin-kartam--eb6ba61d30a8571a4334ba958ec163c4?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.eb6ba61d&msid=1607272371.40163.85361.575835&persistent_id=121398921&stid=qmg8hS8frCNxryqxD-D-&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 34323,
+            "body": {
+                "title": "В Минске прошли задержания на акции протеста",
+                "link": "https://yandex.ru/news/story/V_Minske_proshli_zaderzhaniya_na_akcii_protesta--f0bd9e56557d33c15487f2510356382b?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.f0bd9e56&msid=1607272371.40163.85361.575835&persistent_id=121466049&stid=3Bu4otaeRkvU9DJaWuZH&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 4332,
+            "body": {
+                "title": "Чубайс выстрелил из гаубицы в Петербурге в честь вступления в новую должность",
+                "link": "https://yandex.ru/news/story/CHubajs_vystrelil_iz_gaubicy_v_Peterburge_v_chest_vstupleniya_v_novuyu_dolzhnost--dcd652f78c0d32c84893017fc27ee3b1?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.dcd652f7&msid=1607272371.40163.85361.575835&persistent_id=121331582&stid=6J5XSK9EVoqg_DnsxqBA&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 57764,
+            "body": {
+                "title": "Кравчук предложил ужесточить санкции против РФ из-за Донбасса",
+                "link": "https://yandex.ru/news/story/Kravchuk_predlozhil_uzhestochit_sankcii_protiv_RF_iz-za_Donbassa--d65ba6b59257d5fac117c61c6d554b03?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.d65ba6b5&msid=1607272462.38183.82664.566861&persistent_id=121418880&stid=jHG9RPzr-6Tz73M7cMo7&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 62232,
+            "body": {
+                "title": "МИД РФ обвинил США в поощрении реваншизма из-за позиции по Курилам",
+                "link": "https://yandex.ru/news/story/MID_RF_obvinil_SSHA_v_pooshhrenii_revanshizma_iz-za_pozicii_po_Kurilam--9457de072cb8a3632689b33a578826ea?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.9457de07&msid=1607272462.38183.82664.566861&persistent_id=121398921&stid=qmg8hS8frCNxryqxD-D-&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        },
+        {
+            "id": 23422,
+            "body": {
+                "title": "В Минске начались отдельные задержания участников акции протеста",
+                "link": "https://yandex.ru/news/story/V_Minske_nachalis_otdelnye_zaderzhaniya_uchastnikov_akcii_protesta--bfbf5defabb2621837e69b5d394ec103?fan=1&from=main_portal&lang=ru&lr=2&mlid=1607271720.glob_225.bfbf5def&msid=1607272462.38183.82664.566861&persistent_id=121466049&stid=3Bu4otaeRkvU9DJaWuZH&t=1607271720&utm_medium=topnews_news&utm_source=morda_desktop",
+                "date": '8 дек в 12:40',
+                "author": "Иванов И.И.",
+                "readed": false
+            },
+        }
+    ]
+
+    const widget = Object.create(
+        {
+            init() {
+
+                this._loadNews();
+                this._updateNewsCounter();
+                this._dragElement(document.querySelector('#news-widget'));
+                this._readHandler();
+
+            },
+
+            _loadNews() {
+                newsJSON.forEach((news, id) => {
+                    this.news.push(newsJSON[id]);
+                })
+            },
+
+            _updateNews(dataNewsId, selector) {
+                let id = this.news.findIndex(item => item.id === dataNewsId)
+                let $news = document.querySelectorAll('.news')[id]
+                $news.querySelector('.__readed').textContent = 'прочитано';
+            },
+
+            _updateNewsCounter() {
+                let $newsCounter = document.querySelector('#news-counter');
+                $newsCounter.textContent = widget.news.length
+            },
+
+            _openAndCloseWidget() {
+                this._createNews();
+                let $newsWidget = document.querySelector('#news-widget'),
+                    $widgetContent = document.querySelector('#widget-content'),
+                    $newsCounter = document.querySelector('#news-counter');
+
+                $newsWidget.classList.toggle('closed');
+                $newsWidget.classList.toggle('opened');
+                $newsCounter.classList.toggle('hidden');
+                $widgetContent.classList.toggle('hidden');
+
+            },
+
+            _createNews() {
+                let $widgetContent = document.querySelector('#widget-content');
+
+                if ($widgetContent.childElementCount == 1 && this._states.newsCreated == false) {
+                    this._states.newsCreated = true;
+
+                    this.news.forEach(news => {
+                        let $news = document.createElement('div'),
+                            $newsLeft = document.createElement('div'),
+                            $newsRight = document.createElement('div'),
+                            $newsTitle = document.createElement('div'),
+                            $newsLinkDiv = document.createElement('div'),
+                            $newsLinkDivA = document.createElement('a'),
+                            $newsAuthor = document.createElement('div'),
+                            $newsDate = document.createElement('div'),
+                            $newsReaded = document.createElement('div');
+
+                        $news.classList.add('news');
+                        $newsLeft.classList.add('left');
+                        $newsRight.classList.add('right');
+                        $newsTitle.classList.add('__title');
+                        $newsLinkDiv.classList.add('__link');
+                        $newsAuthor.classList.add('__author');
+                        $newsDate.classList.add('__date');
+                        $newsReaded.classList.add('__readed');
+
+                        $news.dataset.newsId = news.id;
+                        $newsTitle.textContent = news.body.title;
+                        $newsLinkDivA.textContent = 'Читать в источнике...';
+                        $newsLinkDivA.href = news.body.link;
+                        $newsLinkDivA.dataset.newsId = news.id;
+                        $newsLinkDivA.target = '_blank'
+                        $newsAuthor.textContent = news.body.author;
+                        $newsDate.textContent = news.body.date;
+                        news.body.readed ? $newsReaded.textContent = 'прочитано' : $newsReaded.textContent = 'не прочитано'
+
+                        $widgetContent.append($news);
+                        $news.append($newsLeft);
+                        $news.append($newsRight);
+                        $newsLeft.append($newsTitle);
+                        $newsLeft.append($newsLinkDiv);
+                        $newsLinkDiv.append($newsLinkDivA);
+                        $newsRight.append($newsDate);
+                        $newsRight.append($newsReaded);
+                        $newsRight.append($newsAuthor);
+                    })
+                }
+            },
+
+            _dragElement(elmnt) {
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                let startPosElmntY = 0, startPosElmntX = 0;
+
+                elmnt.onmousedown = dragMouseDown;
+
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+
+                    startPosElmntY = elmnt.style.top;
+                    startPosElmntX = elmnt.style.left;
+
+                    document.onmouseup = closeDragElement;
+                    document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+
+                    elmnt.style.cursor = 'grabbing';
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    elmnt.style.cursor = 'pointer';
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+
+                    if (startPosElmntX == elmnt.style.left && startPosElmntY == elmnt.style.top) {
+                        if (event.target == document.querySelector('#close-widget') || widget._states.open == false) {
+                            widget._openAndCloseWidget();
+                            widget._states.open = !widget._states.open;
+                        }
+                    }
+                }
+            },
+
+            _readHandler() {
+                document.querySelector('#widget-content').onmouseup = function (event) {
+                    let target = event.target.closest('a')
+                    if (target) {
+                        widget.news.forEach(news => {
+                            if (news.id == target.dataset.newsId) {
+                                news.body.readed = true;
+                                widget._updateNews(news.id, '.__readed');
+                            }
+                        })
+                    }
+
+                }
+            }
+        },
+        {
+            _states: {
+                value: {
+                    open: false,
+                    newsCreated: false
+                },
+                enumerable: false,
+                writable: false,
+                configurable: false
+            },
+            name: {
+                value: 'NewsWidget v1.0',
+                enumerable: true,
+                writable: false,
+                configurable: false
+            },
+            news: {
+                value: [],
+                enumerable: false,
+                writable: false,
+                configurable: false
+            },
+        }
+    )
+
+    widget.init();
+
+</script>
+
+</html>
+
+
+<!-- 
+
+Необходимо сверстать и оживить небольшой виджет новостной ленты.
+Требования:
+- Подключение виджета сделать через JavaScript, который вставляется на страницу.
+- Из скрипта получается набор данных, из которых формируется лента.
+- Одно сообщение ленты содержит поля:
+- Заголовок
+- Автор
+- Дата и время
+- Ссылка на подробности
+- Статус (прочитано или нет)
+- После загрузки данных в нижней части страницы появляется иконка/картинка с отображением количества сообщений в ленте. При клике на иконку открывается виджет со списком сообщений.
+- Внешнее отображение виджета придумать самостоятельно или взять за основу пример какого-либо сервиса.
+- Дополнительно можно добавить интерактивности и по какому-то действию отмечать сообщение прочитанным. Само значение можно не сохранять, а сделать эмуляцию.
+- Код оформить в виде репозитория на GitHub и в ответе прислать ссылку на репозиторий. 
+
+-->

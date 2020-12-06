@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Open+Sans+Condensed:wght@300&family=Raleway:wght@300&family=Rubik&display=swap");
+html {
+  margin: 0;
+}
+
+body {
+  background: #2f2f2f;
+}
+
+.widget {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.widget::-webkit-scrollbar {
+  width: 0px;
+}
+
+.closed {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-transition: .5s transform;
+  transition: .5s transform;
+}
+
+.closed:hover {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+.closed .__counter {
+  font-family: Russo One;
+  font-size: 40px;
+  font-weight: bold;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: white;
+}
+
+.opened {
+  width: 400px;
+  height: 430px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow-y: scroll;
+  pointer-events: visible;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  -webkit-box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.8);
+          box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.8);
+}
+
+.content {
+  margin: 20px 0 0 0;
+}
+
+.content .close-widget {
+  cursor: pointer;
+  pointer-events: all;
+  margin: 0 auto;
+  width: 100px;
+  height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid white;
+  border-radius: 10px;
+  -webkit-transition: .5s color, .5s background;
+  transition: .5s color, .5s background;
+  font-family: "Rubik";
+}
+
+.content .close-widget:hover {
+  color: #fff;
+  background: #2f2f2f;
+}
+
+.news {
+  width: 340px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 20px 0 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  font-family: "Rubik";
+  color: rgba(0, 0, 0, 0.8);
+  -webkit-transition: .5s background, .7s box-shadow;
+  transition: .5s background, .7s box-shadow;
+}
+
+.news:hover {
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 3px 4px 0px 0px black;
+          box-shadow: 3px 4px 0px 0px black;
+}
+
+.news .left {
+  width: 65%;
+  margin: 0 0 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.news .left .__title {
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.news .left .__link a {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.news .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  text-align: right;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: 0 10px 0 0;
+}
+
+.news .right .__date {
+  width: 100%;
+  font-size: 13px;
+}
+
+.news .right .__readed {
+  width: 100%;
+  font-size: 10px;
+}
+
+.news .right .__author {
+  width: 100%;
+  font-size: 13px;
+}
+/*# sourceMappingURL=style.css.map */

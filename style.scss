@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Open+Sans+Condensed:wght@300&family=Raleway:wght@300&family=Rubik&display=swap');
+
+$ffmain: 'Rubik';
+$fcolor: rgba(0, 0, 0, .8);
+
+html {
+    margin: 0;
+}
+
+body {
+    background: #2f2f2f;
+}
+
+.widget {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    border: 2px solid rgba(255, 255, 255, .7);
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+}
+
+.closed {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .2);
+    transition: .5s transform;
+
+    &:hover {
+        transform: scale(1.5);
+    }
+
+    .__counter {
+        font-family: Russo One;
+        font-size: 40px;
+        font-weight: bold;
+        user-select: none;
+        color: rgba(255, 255, 255, 9);
+    }
+}
+
+.opened {
+    width: 400px;
+    height: 430px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    overflow-y: scroll;
+    pointer-events: visible;
+    background: rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.8);
+}
+
+.content {
+    margin: 20px 0 0 0;
+
+    .close-widget {
+        cursor: pointer;
+        pointer-events: all;
+        margin: 0 auto;
+        width: 100px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 9);
+        border-radius: 10px;
+        transition: .5s color, .5s background;
+        font-family: $ffmain;
+
+        &:hover {
+            color: #fff;
+            background: #2f2f2f;
+        }
+    }
+}
+
+.news {
+    width: 340px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 9);
+    border-radius: 10px;
+    margin: 20px 0 20px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    font-family: $ffmain;
+    color: $fcolor;
+    transition: .5s background, .7s box-shadow;
+
+    &:hover {
+        background: rgba(255, 255, 255, .7);
+        box-shadow: 3px 4px 0px 0px black;
+    }
+
+    .left {
+        width: 65%;
+        margin: 0 0 0 10px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        .__title {
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .__link {
+            & a {
+                font-size: 10px;
+                color: $fcolor;
+            }
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-flow: row wrap;
+        text-align: right;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 0 10px 0 0;
+
+        .__date {
+            width: 100%;
+            font-size: 13px;
+        }
+
+        .__readed {
+            width: 100%;
+            font-size: 10px;
+        }
+
+        .__author {
+            width: 100%;
+            font-size: 13px;
+        }
+    }
+}
