@@ -11,11 +11,35 @@
 <body>
     <div id="news-widget" class="widget closed">
         <div id="news-counter" class="__counter">
+            10
         </div>
         <div id="widget-content" class="content hidden">
             <div id="close-widget" class="close-widget">Закрыть</div>
         </div>
     </div>
+    <!-- <div id="second news-widget" class="second widget opened">
+        <div class="scontent">
+            <div class="news">
+                <div class="left">
+                    <div class="__title">Заголовок новости</div>
+                    <div class="__link">
+                        <a href="">Читать в источнике</a>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="__date">
+                        8 дек в 13:37
+                    </div>
+                    <div class="__readed">
+                        прочитано
+                    </div>
+                    <div class="__author">
+                        Иванов И.И.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </body>
 <script>
 
@@ -95,12 +119,23 @@
     const widget = Object.create(
         {
             init() {
+                console.log('Widget start work!');
 
                 this._loadNews();
                 this._updateNewsCounter();
                 this._dragElement(document.querySelector('#news-widget'));
                 this._readHandler();
 
+                console.log(`Today ${widget.news.length} news`);
+
+                widget.news.forEach((news, item) => {
+                    console.log(`-----------------------\nNews number - ${item + 1}`);
+                    for (const key in news) {
+                        if (news.hasOwnProperty(key)) {
+                            console.log(`${key}:`, news[key])
+                        }
+                    }
+                })
             },
 
             _loadNews() {
@@ -110,7 +145,7 @@
             },
 
             _updateNews(dataNewsId, selector) {
-                let id = this.news.findIndex(item => item.id === dataNewsId)
+                let id = this.news.findIndex( item => item.id === dataNewsId)
                 let $news = document.querySelectorAll('.news')[id]
                 $news.querySelector('.__readed').textContent = 'прочитано';
             },
@@ -121,6 +156,7 @@
             },
 
             _openAndCloseWidget() {
+                console.log('open widget');
                 this._createNews();
                 let $newsWidget = document.querySelector('#news-widget'),
                     $widgetContent = document.querySelector('#widget-content'),
@@ -131,9 +167,11 @@
                 $newsCounter.classList.toggle('hidden');
                 $widgetContent.classList.toggle('hidden');
 
+                // this._states.open = true;
             },
 
             _createNews() {
+                console.log('создали новости');
                 let $widgetContent = document.querySelector('#widget-content');
 
                 if ($widgetContent.childElementCount == 1 && this._states.newsCreated == false) {
@@ -167,7 +205,8 @@
                         $newsLinkDivA.target = '_blank'
                         $newsAuthor.textContent = news.body.author;
                         $newsDate.textContent = news.body.date;
-                        news.body.readed ? $newsReaded.textContent = 'прочитано' : $newsReaded.textContent = 'не прочитано'
+                        news.body.readed ? $newsReaded.textContent = 'прочитано'
+                            : $newsReaded.textContent = 'не прочитано'
 
                         $widgetContent.append($news);
                         $news.append($newsLeft);
@@ -178,16 +217,17 @@
                         $newsRight.append($newsDate);
                         $newsRight.append($newsReaded);
                         $newsRight.append($newsAuthor);
+                        console.log('news');
                     })
                 }
             },
 
             _dragElement(elmnt) {
                 let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-                let startPosElmntY = 0, startPosElmntX = 0;
 
                 elmnt.onmousedown = dragMouseDown;
-
+                let startPosElmntY = 0;
+                let startPosElmntX = 0;
                 function dragMouseDown(e) {
                     e = e || window.event;
                     e.preventDefault();
@@ -210,7 +250,6 @@
                     pos2 = pos4 - e.clientY;
                     pos3 = e.clientX;
                     pos4 = e.clientY;
-
                     elmnt.style.cursor = 'grabbing';
                     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
                     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -226,26 +265,35 @@
                             widget._openAndCloseWidget();
                             widget._states.open = !widget._states.open;
                         }
+                    } else {
+                        console.log('подвинулся');
                     }
                 }
             },
 
             _readHandler() {
-                document.querySelector('#widget-content').onmouseup = function (event) {
+                document.querySelector('#widget-content').onmouseup = function(event) {
                     let target = event.target.closest('a')
                     if (target) {
-                        widget.news.forEach(news => {
+                        widget.news.forEach( news => {
                             if (news.id == target.dataset.newsId) {
                                 news.body.readed = true;
+                                console.log('изменили состояние новости на "прочитано" у новости id', news.id);
                                 widget._updateNews(news.id, '.__readed');
                             }
                         })
+                        console.log('клик по ссылке', target.dataset.newsId);
                     }
-
+                    
                 }
             }
         },
         {
+            test: {
+                value: function () {
+                    console.log('test');
+                }
+            },
             _states: {
                 value: {
                     open: false,
@@ -269,13 +317,19 @@
             },
         }
     )
-
+    for (const key in widget) {
+        if (widget.hasOwnProperty(key)) {
+            console.log(key);
+        }
+    }
     widget.init();
+</script>
+<script>
+
 
 </script>
 
 </html>
-
 
 <!-- 
 
